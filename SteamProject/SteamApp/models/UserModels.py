@@ -1,9 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
 
-class User(AbstractBaseUser):
-    nickname = models.CharField(max_length=30, unique=True)
+class User(AbstractUser):
+    username = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     ROL_CHOICES = (
         ('USER', 'User'),
@@ -12,13 +13,14 @@ class User(AbstractBaseUser):
         ('DEV','Creador de juegos')
     )
     rol = models.CharField(max_length=10, choices=ROL_CHOICES, default='USER')
-    email = models.EmailField(max_length=254, unique=True)
     ESTADO_CHOICES = (
         ('ACTIVE', 'Active'),
         ('SUSPENDIDO', 'Suspended'),
         ('BANNED', 'Banned')
     )
-    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='ACTIVE')
+    rol = models.CharField(max_length=10, choices=ROL_CHOICES, default='USER')
+    date_joined = models.DateTimeField(default=now)
 
     def __str__(self):
-        return f"{self.nickname} ({self.id})"
+        return self.username
+

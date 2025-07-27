@@ -28,4 +28,4 @@ class UsersViewSet(viewsets.ModelViewSet):
             return Response ({"error": "Usuario no autenticado"},status=status.HTTP_401_UNAUTHORIZED)
 
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)    
+        return Response(serializer.data, status=status.HTTP_200_OK)
