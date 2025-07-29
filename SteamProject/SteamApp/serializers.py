@@ -1,4 +1,5 @@
 from .models.UserModels import User
+from .models.ProfileModels import Profile
 from .models.BibliotecaModels import Biblioteca, JuegoBiblioteca
 from .models.GamesModels import Juego
 from rest_framework import serializers
@@ -17,6 +18,11 @@ class UserSerializers(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('__all__')
 
 class JuegoSerializer(serializers.ModelSerializer):
     class Meta:
