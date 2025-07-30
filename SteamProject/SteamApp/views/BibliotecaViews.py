@@ -2,9 +2,16 @@ from rest_framework import viewsets,status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from ..serializers import  JuegoBibliotecaSerializer
+from ..serializers import  JuegoBibliotecaSerializer, BibliotecaSerializer
 from ..models.BibliotecaModels import Biblioteca, JuegoBiblioteca
 from ..models.GamesModels import Juego
+
+class BibliotecaView(viewsets.ModelViewSet):
+    serializer_class = BibliotecaSerializer
+    queryset = Biblioteca.objects.all()
+    permission_classes = [AllowAny]
+    authentication_classes = [JWTAuthentication]
+    http_method_names = ['get']
 
 class JuegosBibliotecaViewSet(viewsets.ModelViewSet):
     serializer_class = JuegoBibliotecaSerializer
@@ -35,7 +42,7 @@ class JuegosBibliotecaPostViewSet(viewsets.ModelViewSet):
         except Juego.DoesNotExist:
             return Response({"error": "El juego no existe"}, status=status.HTTP_404_NOT_FOUND)
 
-        game_price = float(juego.precio)
+        game_price = juego.precio
 
 
 
@@ -54,7 +61,7 @@ class JuegosBibliotecaPostViewSet(viewsets.ModelViewSet):
                     request.user.save()
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
                 else:
-                    return Response({"error": "que quieres oe pobre."}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"error": "No cuentas con el saldo suficiente."}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 return Response({"error": "No tienes permiso para agregar juegos a esta biblioteca."}, status=status.HTTP_403_FORBIDDEN)
             

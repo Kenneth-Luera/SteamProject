@@ -42,3 +42,18 @@ class JuegoBibliotecaSerializer(serializers.ModelSerializer):
     class Meta:
         model = JuegoBiblioteca
         fields = '__all__'
+        
+class JuegoBibliotecaSerializer(serializers.ModelSerializer):
+    juego = JuegoBiblioteca
+
+    class Meta:
+        model = JuegoBiblioteca
+        fields = 'all'
+
+class BibliotecaSerializer(serializers.ModelSerializer):
+    juegos = JuegoBibliotecaSerializer(source='juegobiblioteca_set', many=True)
+
+    class Meta:
+        model = Biblioteca
+        fields = ['id', 'user', 'juegos']
+    
