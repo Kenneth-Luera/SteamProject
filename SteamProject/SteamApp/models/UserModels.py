@@ -20,7 +20,7 @@ class User(AbstractUser):
     )
     rol = models.CharField(max_length=10, choices=ROL_CHOICES, default='USER')
     date_joined = models.DateTimeField(default=now)
+    saldo = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def __str__(self):
         return self.username
-

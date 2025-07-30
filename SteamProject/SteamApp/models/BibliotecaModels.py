@@ -9,7 +9,6 @@ class Biblioteca(models.Model):
     def __str__(self):
         return f"Biblioteca de {self.user.username}"
 
-
 class JuegoBiblioteca(models.Model):
     biblioteca = models.ForeignKey(Biblioteca, on_delete=models.CASCADE)
     juego = models.ForeignKey(Juego, on_delete=models.CASCADE)
@@ -23,4 +22,4 @@ class JuegoBiblioteca(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.juego.nombre} en {self.biblioteca.user.username}"
+        return f"{self.juego.nombre} en la biblioteca de {self.biblioteca.user.username}"

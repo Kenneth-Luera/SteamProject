@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views.UserViews import RegisterUserViewSet, UsersViewSet
 from .views.GamesViews import JuegosViewSet
 from .views.ProfileViews import EditProfileViewSet, PublicProfileViewSet
+from .views.BibliotecaViews import JuegosBibliotecaViewSet, JuegosBibliotecaPostViewSet
 
 
 router = DefaultRouter()
@@ -11,11 +12,14 @@ router.register(r'register', RegisterUserViewSet, basename='register')
 router.register(r'users', UsersViewSet, basename='users')
 router.register(r'juegos', JuegosViewSet, basename='juegos')
 router.register(r'profiles', PublicProfileViewSet, basename='profiles')
+router.register(r'juegosbiblioteca', JuegosBibliotecaViewSet, basename='juegosbiblioteca')
+
 
 
 urlpatterns = [
     path('', include(router.urls)),
 
+    path('juegosbiblioteca/add', JuegosBibliotecaPostViewSet.as_view({'post': 'post'}), name='juegosbiblioteca-post'),
     path('juegos/<int:pk>/', JuegosViewSet.as_view({'put': 'put', 'delete': 'delete'}), name='juego-detail'),
     path('editprofile/<int:pk>/', EditProfileViewSet.as_view({'put': 'put'}), name='profile-detail'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
