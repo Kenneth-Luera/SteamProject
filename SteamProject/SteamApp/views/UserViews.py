@@ -14,9 +14,9 @@ class RegisterUserViewSet(viewsets.ModelViewSet):
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializers
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     authentication_classes = [JWTAuthentication]
-    http_method_names = ['get']
+    http_method_names = ['get', 'put']
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:

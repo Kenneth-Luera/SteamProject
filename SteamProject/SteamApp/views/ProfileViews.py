@@ -2,8 +2,9 @@ from rest_framework import viewsets,status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from ..serializers import ProfileSerializer
-from ..models.ProfileModels import Profile
+from ..serializers import ProfileSerializer, CustomTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from ..models.ProfileModels import *
 
 class PublicProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -45,3 +46,6 @@ class EditProfileViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Usuario no autenticado"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

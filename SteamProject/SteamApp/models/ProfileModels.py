@@ -23,3 +23,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Perfil de {self.user.username}"
+    
+class Me (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="Me")
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name="MeProfile")
+
+    def __str__(self):
+        return f"Me de {self.user.username}"
+    
+    class Meta:
+        verbose_name = "Me"
+        verbose_name_plural = "Mes"
+

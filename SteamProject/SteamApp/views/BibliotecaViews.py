@@ -35,7 +35,7 @@ class JuegosBibliotecaPostViewSet(viewsets.ModelViewSet):
         except Juego.DoesNotExist:
             return Response({"error": "El juego no existe"}, status=status.HTTP_404_NOT_FOUND)
 
-        game_price = float(juego.precio)
+        game_price = juego.precio
 
 
 
