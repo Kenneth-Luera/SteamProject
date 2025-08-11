@@ -46,6 +46,7 @@ class JuegoBibliotecaSerializer(serializers.ModelSerializer):
     class Meta:
         model = JuegoBiblioteca
         fields = '__all__'
+<<<<<<< HEAD
 
 class CanalMensajeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -110,3 +111,20 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         token['user_id'] = user.id
         return token
+=======
+        
+class JuegoBibliotecaSerializer(serializers.ModelSerializer):
+    juego = JuegoBiblioteca
+
+    class Meta:
+        model = JuegoBiblioteca
+        fields = 'all'
+
+class BibliotecaSerializer(serializers.ModelSerializer):
+    juegos = JuegoBibliotecaSerializer(source='juegobiblioteca_set', many=True)
+
+    class Meta:
+        model = Biblioteca
+        fields = ['id', 'user', 'juegos']
+    
+>>>>>>> 590276fdd5c9dcd8db6128b4e4b1a007e72dd854
