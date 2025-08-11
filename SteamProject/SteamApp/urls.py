@@ -3,15 +3,10 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views.UserViews import RegisterUserViewSet, UsersViewSet
 from .views.GamesViews import JuegosViewSet
-<<<<<<< HEAD
 from .views.ProfileViews import EditProfileViewSet, PublicProfileViewSet, CustomTokenObtainPairView
-from .views.BibliotecaViews import JuegosBibliotecaViewSet, JuegosBibliotecaPostViewSet
+from .views.BibliotecaViews import JuegosBibliotecaViewSet, JuegosBibliotecaPostViewSet, BibliotecaView
 from .views.ChatViews import MensajesViewSet
 
-=======
-from .views.ProfileViews import EditProfileViewSet, PublicProfileViewSet
-from .views.BibliotecaViews import BibliotecaView, JuegosBibliotecaPostViewSet
->>>>>>> 590276fdd5c9dcd8db6128b4e4b1a007e72dd854
 
 
 router = DefaultRouter()
